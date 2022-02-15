@@ -1,4 +1,4 @@
-# 🔥 🚀 30 Laravel Eloquent Tips
+# 🔥 🚀 Laravel Eloquent Tips
 This is a shortlist of the amazing hidden Laravel eloquent  30 tips that make the code go on smoothly.
 
 ## 1 – Invisible Database Columns
@@ -14,7 +14,9 @@ Schema::table('users', function (Blueprint $table){
 $user = User::first();
 $user->secret == null;
 ```
+
 ---
+
 ## 2 – saveQuietly
 If you ever need to save a model but you don't want to trigger any model events, you can use this method:
 
