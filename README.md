@@ -1,4 +1,4 @@
-# 🔥 🚀 30 Laravel Eloquent Tips
+# 🔥 🚀 Laravel Eloquent Tips
 This is a shortlist of the amazing hidden Laravel eloquent  30 tips that make the code go on smoothly.
 
 ## 1 – Invisible Database Columns
