@@ -8,7 +8,7 @@ The invisible column is a new concept in MySQL 8. What it does: when you run a `
 
 And now, Laravel supports these columns:
 
-```
+```php
 Schema::table('users', function (Blueprint $table){
   $table->string('password')->invisble();
 });
@@ -23,7 +23,7 @@ $user->secret == null;
 
 If you ever need to save a model but you don't want to trigger any model events, you can use this method:
 
-```
+```php
 $user = User::first();
 $user->name = "Hamid Afghan";
 
@@ -36,7 +36,7 @@ $user->saveQuietly();
 
 In Laravel, you can define default values for columns in two places: Migrations and models.
 
-```
+```php
 Schema::create('orders', function(Blueprint $table){
   $table->bigIncrements('id');
   $table->string('status', 20)
@@ -49,14 +49,14 @@ This is a well-known feature. The status column will have a default draft value.
 
 But what about this?
 
-```
+```php
 $order = new Order();
 $order->status = null;
 ```
 
 In this case, the status will be null, because it's not persisted yet. And sometimes it causes annoying null value bugs. But fortunately, you can specify default attribute values in the Model as well:
 
-```
+```php
 class Order extends Model
 {
   protected $attributes = [
@@ -67,7 +67,7 @@ class Order extends Model
 
 And now the status will be draft for a New Order:
 
-```
+```php
 $order = new Order();
 $order->status  === 'draft';
 ```
@@ -80,7 +80,7 @@ You can use these two approaches together and you'll never have a null value bug
 
 Before Laravel 8. x we wrote attribute accessors and mutators like these:
 
-```
+```php
 class User extends Model{
   public function getNameAttribute(string $value): string
   {
@@ -100,7 +100,7 @@ It's not bad at all, but as Taylor says in the pull request:
 
 So he recreated this feature this way:
 
-```
+```php
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Model {
@@ -127,13 +127,13 @@ In this example, I used PHP 8 named arguments (the get and set before the functi
 
 Everyone knows about the find method, but did you know that it accepts an array of IDs? So instead of this:
 
-```
+```php
 $users = User::whereIn('id', $ids)->get();
 ```
 
 You can use this:
 
-```
+```php
 $users = User::find($ids);
 ```
 
@@ -143,7 +143,7 @@ $users = User::find($ids);
 
 In Eloquent you can check if a model is "dirty" or not. Dirty means it has some changes that are not persisted yet:
 
-```
+```php
 $user = User::first();
 $user->name = 'Hamid Afghan';
 $user->isDirty() === true;
@@ -158,7 +158,7 @@ The `isDirty` simply returns a bool while the `getDirty ` returns every dirty at
 
 Sometimes you need to save a model and its relationship as well. In this case, you can use the push method:
 
-```
+```php
 $employee = Employee::first();
 $employee->name = 'New Name';
 $employee->address->city = 'New York';
@@ -176,7 +176,7 @@ We all write traits that are being used by Eloquent models. If you need to initi
 
 For example, if you have models with slug, you don't want to rewrite the slug creation logic in every model. Instead, you can define a trait, and use the creating event in the boot method:
 
-```
+```php
 trait HasSlug {
   public static function bootHasSlug() {
       static::creating(function (Model $model) {
@@ -194,7 +194,7 @@ So you need to define a bootTraitName method, and Eloquent will automatically ca
 
 Creating and updating a model often use the same logic. Fortunately Eloquent provides a very convenient method called updateOrCreate:
 
-```
+```php
 $flight = Flight::updateOrCreate(
   ['id' => $id],
   ['price' => 99, 'discounted' => 1],
@@ -215,7 +215,7 @@ I want to show you a real-world example of how I handle creating and updating mo
 
 The Controller:
 
-```
+```php
 public function store(UpsertDepartmentRequest $request): JsonResponse {
     return DepartmentResource::make($this->upsert($request, new Department()))
         ->response()
@@ -243,7 +243,7 @@ update I pass the currently updated instance.
 
 The $this->upsertDepartment refers to an Action:
 
-```
+```php
 class UpsertDepartmentAction {
 
 public function execute( Department $department, DepartmentData $departmentData): Department {
@@ -268,7 +268,7 @@ And the second argument is the DTO as an array, so the attributes of the Departm
 
 Just for confusion Laravel uses the word upsert for multiple update or create operations. This is how it looks:
 
-```
+```php
 Flight::upsert(
   [
     ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' =>99],
