@@ -269,7 +269,7 @@ And the second argument is the DTO as an array, so the attributes of the Departm
 Just for confusion Laravel uses the word upsert for multiple update or create operations. This is how it looks:
 
 ```
- Flight::upsert(
+Flight::upsert(
   [
     ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' =>99],
     ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
