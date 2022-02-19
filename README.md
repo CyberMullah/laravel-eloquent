@@ -289,3 +289,32 @@ So this example will:
 
 - Insert or update a flight from Oakland to San Diego with the price of 99
 - Insert or update a flight from Chicago to New York with the price of 150
+
+---
+
+## 10 – Order by Mutator
+Imagine you have this:
+
+```PHP
+function getFullNameAttribute()
+{
+  return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+}
+```
+
+Now, you want to order by that full_name? This won’t work:
+
+```PHP
+$clients = Client::orderBy('full_name')->get(); // doesn't work
+```
+
+The solution is quite simple. We need to order the results after we get them.
+
+```PHP
+$clients = Client::get()->sortBy('full_name'); // works!
+```
+
+Notice that the function name is different – it’s not orderBy, it’s sortBy.
+
+
+
