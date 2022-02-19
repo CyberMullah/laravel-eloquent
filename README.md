@@ -292,7 +292,7 @@ So this example will:
 
 ---
 
-## 10 – Order by Mutator
+## 11 – Order by Mutator
 Imagine you have this:
 
 ```PHP
