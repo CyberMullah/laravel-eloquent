@@ -316,5 +316,4 @@ $clients = Client::get()->sortBy('full_name'); // works!
 
 Notice that the function name is different – it’s not orderBy, it’s sortBy.
 
-
-
+Note: it is important to keep in your mind, if your query `Client::get()` returns a huge rows, `->sortBy()` function would require memory usege. Make sure the server don't go out of memorey. 
