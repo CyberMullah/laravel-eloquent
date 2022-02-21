@@ -317,3 +317,29 @@ $clients = Client::get()->sortBy('full_name'); // works!
 Notice that the function name is different – it’s not orderBy, it’s sortBy.
 
 **Note:** it is important to keep in your mind, if your query `Client::get()` returns a huge rows, `->sortBy()` function would require memory usege. Make sure the server don't go out of memorey. 
+
+
+--- 
+
+## 11 – Raw query methods
+Eloquent statements may need the addition of raw queries. There are functions for it, however.
+
+```PHP
+// WhereRaw
+$order = DB::table('orders')
+  ->whereRaw('price < IF(state = "TX", ?, 100 )', [200])
+  ->get();
+  
+// havingRaw
+Product::groupBy('categrory_id')
+  ->havingRaw('COUNT(*) > 1')
+  ->get();
+  
+// orderbyRaw
+User::query()
+  ->where('created_at', '>', $request->date)
+  ->orderByRaw('(updated_at - created_at) DESC')
+  ->get();
+
+```
+
