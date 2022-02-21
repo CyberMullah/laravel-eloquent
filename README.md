@@ -321,7 +321,7 @@ Notice that the function name is different – it’s not orderBy, it’s sortBy
 
 --- 
 
-## 11 – Raw query methods
+## 12 – Raw query methods
 Eloquent statements may need the addition of raw queries. There are functions for it, however.
 
 ```PHP
