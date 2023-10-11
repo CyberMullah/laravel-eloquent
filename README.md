@@ -343,3 +343,12 @@ User::query()
 
 ```
 
+## 13 – whereColumn method
+The whereColumn method in Laravel's allows us to compare two columns from the same table. 
+
+In this example, we are using it to retrieve all products where the price is less than or equal to the cost.
+
+```PHP
+// WhereColumn
+$products = Product::whereColumn('price', '<=', 'cost')->get();
+```
