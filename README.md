@@ -146,8 +146,8 @@ In Eloquent you can check if a model is "dirty" or not. Dirty means it has some 
 ```php
 $user = User::first();
 $user->name = 'Hamid Afghan';
-$user->isDirty() === true;
-$user->getDirty === ['name' => 'Guest User'];
+$user->isDirty(); // true
+$user->getDirty(); // ['name' => 'Guest User'];
 ```
 
 The `isDirty` simply returns a bool while the `getDirty ` returns every dirty attribute.
