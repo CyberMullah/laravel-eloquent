@@ -352,3 +352,25 @@ In this example, we are using it to retrieve all products where the price is les
 // WhereColumn
 $products = Product::whereColumn('price', '<=', 'cost')->get();
 ```
+
+## 14 - appends 
+
+If you have an attribute accessor and you often need it when the model is converted into JSON you can use the $appends property:
+
+```php
+class Product extends Model {
+
+  protected $appends = ['current_price'];
+  
+  public function getCurrentPriceAttribute(): float {
+    
+    return $this->prices
+        ->where('from', '<=' now())
+        ->where('to', '>=', now())
+        ->first()
+        ->price;
+  } 
+}
+```
+
+Now the `current_price` column will be appended to the Product model every time it gets converted into JSON. It's useful when you're working with Blade templates. With APIs, I would stick to Resources.
